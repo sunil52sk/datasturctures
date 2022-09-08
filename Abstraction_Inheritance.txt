@@ -1,0 +1,379 @@
+Inheritance:
+----------------
+1) is-a relationship.
+2) The derived class inherits the features from the base class and can have 
+    additional features of its own.
+
+Single Inheritance:
+----------------------
+#include <iostream>
+using namespace std;
+class calculate // base
+{
+    public:
+    int num1,num2;
+    void setNum1(int n)
+    {
+      num1=n;//10
+    }
+    void setNum2(int n)
+    {
+      num2=n;//20
+    }
+};
+class Add:public calculate
+{
+    public:
+    int res;
+    void display()
+    {
+        res=num1+num2;
+        cout<<"Calculated value is "<<res;
+    }
+};
+int main()
+{
+    Add a;
+    a.setNum1(10);
+    a.setNum2(20);
+    a.display();
+    return 0;
+}
+
+Hierarchical Inheritance:
+----------------------------
+#include <iostream>
+using namespace std;
+class calculate
+{
+    public:
+    int num1,num2;
+    void setNum1(int n)
+    {
+      num1=n;
+    }
+    void setNum2(int n)
+    {
+      num2=n;
+    }
+};
+class Add:public calculate
+{
+    public:
+    int res;
+    void display()
+    {
+        res=num1+num2;
+        cout<<"Added value is "<<res<<endl;
+    }
+};
+class Sub:public calculate
+{
+    public:
+    int res;
+    void display()
+    {
+        res=num1-num2;
+        cout<<"Subtracted value is "<<res<<endl;
+    }
+};
+int main()
+{
+    Add a;
+    a.setNum1(10);
+    a.setNum2(20);
+    a.display();
+    Sub s;
+    s.setNum1(25);
+    s.setNum2(15);
+    s.display();
+    return 0;
+}
+
+Multiple Inheritance:
+-------------------------
+
+#include <iostream>
+using namespace std;
+class calculate //B1
+{
+    public:
+    int num1;
+    void setNum1(int n)
+    {
+      num1=n;
+    }
+};
+class calculate1
+{
+    public:
+    int num2;
+    void setNum2(int n)
+    {
+      num2=n;
+    }
+};
+class Add:public calculate,public calculate1
+{
+    public:
+    int res;
+    void display()
+    {
+        res=num1+num2;
+        cout<<"Added value is "<<res<<endl;
+    }
+};
+int main()
+{
+    Add a;
+    a.setNum1(10);
+    a.setNum2(20);
+    a.display();
+    return 0;
+}
+
+Multilevel Inheritance:
+------------------------
+#include <iostream>
+using namespace std;
+class calculate
+{
+    public:
+    int num1;
+    void setNum1(int n)
+    {
+      num1=n;
+    }
+};
+class calculate1 :public calculate
+{
+    public:
+    int num2;
+    void setNum2(int n)
+    {
+      num2=n;
+    }
+};
+class Add:public calculate1
+{
+    public:
+    int res;
+    void display()
+    {
+        res=num1+num2;
+        cout<<"Added value is "<<res<<endl;
+    }
+};
+int main()
+{
+    Add a;
+    a.setNum1(10);
+    a.setNum2(20);
+    a.display();
+    return 0;
+}
+
+CODE 5:
+
+#include<iostream>
+using namespace std;
+class A
+{
+    public:
+        A(){ callA = 0; }
+        int callA;
+        void inc(){ callA++; }
+        void func(int & a)
+        {
+            a = a * 2;
+            inc();
+        }
+        int getA(){ return callA;    }
+};
+class B
+{
+    public:
+        B(){ callB = 0; }
+        int callB;
+        void inc(){ callB++; }
+        void func(int & a)
+        {
+            a = a * 3;
+            inc();
+        }
+        int getB(){ return callB; }
+};
+class C
+{
+    public:
+        C(){ callC = 0;  }
+        int callC;
+        void inc(){ callC++; }
+        void func(int & a)
+        {
+            a = a * 5;
+            inc();
+        }
+        int getC(){ return callC; }
+};
+class D : public A,public B,public C
+{
+  int val;
+  public:
+  D()
+  { val=1; }
+  void update_val(int new_val)
+  {
+    while (new_val!=val) {
+      if (new_val/val % 2 == 0) A::func(val);
+      else if (new_val/val % 3 == 0) B::func(val);
+      else if (new_val/val % 5 == 0) C::func(val);
+    }
+  }
+ 
+  void check(int  new_val){
+  update_val(new_val);
+ cout << "Value = " << val << endl << "A's func called " << getA() << " times " << endl << "B's func called " << getB() << " times" << endl << "C's func called " << getC() << " times" << endl;
+  }
+};
+int main()
+{
+    D d;
+    int new_val;
+    cin >> new_val;
+    d.check(new_val);
+}
+
+
+Abstraction:
+----------------
+1) Provide only essential information about data, by hiding the 
+     implementation details.
+2) Eg: Car, Remote, Watsapp, header files etc
+3) Access specifiers helps of implement abstraction in C++.
+
+Eg1:
+
+#include <iostream>
+using namespace std;
+class car  //base or super or parent //abstract class
+{
+    public:
+    virtual void speed()=0;//pure virtual function
+};
+class BMW: public car{
+    public:
+    void speed() {
+        cout<<"200 km/hr\n";
+    }
+};
+class Audi: public car{
+    public:
+    void speed() {
+        cout<<"250 km/hr";
+    }
+};
+int main()
+{
+   BMW b;
+   Audi a;
+   b.speed();
+   a.speed();
+   return 0;
+}
+
+Eg2: 
+
+#include <iostream>
+using namespace std;
+class draw{ //abst BC
+    public:
+    virtual void drawShape()=0;
+};
+class circle: public draw{
+    public:
+    void drawShape() {
+        cout<<"Draw Circle";
+    }
+};
+class square: public draw{
+    public:
+    void drawShape() {
+        cout<<"Draw Square";
+    }
+};
+int main()
+{
+   circle c;
+   c.drawShape();
+   square s;
+   s.drawShape();
+   return 0;
+}
+
+Portal task 3:
+
+#include <iostream>
+using namespace std;
+class A{
+    public:
+    virtual void print()=0;
+};
+class B: public A{
+    public:
+    int x;
+    int cube(int n) {
+        return (n*n*n);
+    }
+    int square(int n) {
+        return (n*n);
+    }
+    void print() {
+        cout<<x;
+    }
+};
+int main()
+{
+   int n;
+   cin>>n;
+   B ob;
+   if((n%2)==0)
+       ob.x=ob.cube(n)+ob.square(n);
+   else
+       ob.x=ob.cube(n)-ob.square(n);
+   ob.print();
+   return 0;
+}
+
+Portal task 4:
+
+#include <iostream>
+
+using namespace std;
+class Base{
+    public:
+    virtual void game()=0;
+};
+class Derived: public Base{
+    public:
+    char a;
+    int s=0;
+    void game() {
+        for(int i=0;i<4;i++)
+        {
+            cin>>a;
+        if(a>='A'&&a<='Z')
+           s=s+10; 
+        else
+            s=s-5;
+        }
+        cout<<"Score : "<<s;
+    }
+};
+int main()
+{
+  Derived dd;
+   dd.game();
+   return 0;
+}
+

@@ -1,0 +1,346 @@
+Class and Object :
+-----------------------
+- class leads to Object-Oriented programming.
+
+student
+class
+sec
+roll
+name
+addr
+mailid
+mark
+
+detaildisplay()
+
+findgrad()
+
+
+
+Dog:
+------
+State/Feature/member :
+1) color
+2)breed
+
+Method/ Behaviour/member function:
+
+barking
+eating
+
+class dog
+{
+char color[50];
+char breed[50];
+void barking()
+{
+}
+void eating()
+{
+}
+}
+int main()
+{
+ dog d;//
+}
+
+#include<iostream>
+using namespace std;
+class car
+{
+    public:
+    int carnum;
+    string carname;
+};
+int main()
+{
+    car c,c1;
+    c.carname="BMW";
+    c.carnum=123;
+    c1.carname="Audi"
+   c1.carnum=456;
+    cout<<c.carnum;
+    cout<<c.carname;
+    return 0;
+}
+
+Access Specifiers:
+Public - 
+private 
+protected
+Eg: 
+#include<iostream>
+using namespace std;
+class car
+{
+    public:
+    int carnum;
+    private:
+    string carname;
+};
+int main()
+{
+    car c;
+    c.carnum=123;
+    c.carname="BMW";	
+    cout<<c.carnum;
+    cout<<c.carname;    
+    return 0;
+}
+Constructors:
+------------------
+=> to give default or proper values to the class members
+=> shld be same as class name
+=> no return type
+=> invoked automatically when is created.
+
+
+#include<iostream>
+using namespace std;
+class car
+{
+    public:
+    int carnum;
+    string carname;
+    car() // default cons
+    {
+        carnum=10;
+        carname="BMW";
+    }
+    
+};
+int main()
+{
+    car c,c1;
+    cout<<c.carnum;
+    cout<<c.carname;
+    return 0;
+}
+
+Method Access:
+
+#include<iostream>
+using namespace std;
+class car
+{
+    public:
+    int carnum;
+    string carname;
+    car(int cn,string cnm)
+    {
+        carnum=cn;
+        carname=cnm;
+    }
+    void display()
+    {
+    cout<<carnum;
+    cout<<carname;
+    }    
+};
+int main()
+{
+    car c(123,"BMW");
+    c.display();
+    return 0;
+}
+
+Constructors Overloading:
+----------------------------------
+// You are using GCC
+#include<iostream>
+using namespace std;
+class car
+{
+    public:
+    int carnum;
+    string carname;
+    car()
+    {
+        carnum=111;
+        carname="XYZ";
+    }
+    car(int cn,string cname)
+    {
+        carnum=cn;
+        carname=cname;
+    }
+    car(string cname)
+    {
+        carnum=111;
+        carname=cname;
+    }
+    /*void input()
+    {
+        cin>>carnum;
+        cin>>carname;
+    }*/
+    void display()
+    {
+    cout<<carnum<<" ";
+    cout<<carname<<" ";
+    cout<<endl;
+    }
+    
+};
+int main()
+{
+    car c;// default / no arg
+    car c1(123,"BMW"); // parameterized constructor call
+    car c2("Swift");
+    c.display();
+    c1.display();
+    c2.display();
+    return 0;
+}
+
+Static:
+--------
+- declared using the keyword static. 
+- memory for the static variable is allocated only one time
+- memory exists till the program executes.
+#include<iostream>
+using namespace std;
+class sample
+{
+   public:
+     static int i;
+     int x;
+};
+int main()
+{
+  sample obj1;
+  sample obj2;
+  obj1.i =2;//error
+  obj2.i = 3; 
+  cout << obj1.i<<" "<<obj2.i;   
+}
+//Error : There can not be multiple copies of same static variables for different objects.
+
+crt way to access static data member:
+-------------------------------------------------
+
+#include<iostream>
+using namespace std;
+class sample
+{
+    public:
+     static int i;
+    void increment()
+    {
+        i++;
+    }
+};
+int sample::i;
+int main()
+{
+  sample obj1;
+  sample obj2;
+  cout<<sample::i;
+  obj1.increment();
+  cout<<obj2.i;
+  return 0;
+}
+
+Eg2:
+
+#include<iostream>
+using namespace std;
+class Bill
+{
+   public:
+      static int bill_num;
+      int total;
+     Bill()
+     {
+         bill_num++; // 1// 2
+         total=100;//100// 100
+     }
+     void billGeneration()
+     {
+        cout<<"Current bill number "<<bill_num<<endl;//1
+        cout<<"Total="<<total-50; //50
+     }
+};
+int Bill ::bill_num=0;
+int main()
+{
+  cout<<"Initial Bill number is "<<Bill::bill_num<<endl;
+  Bill obj1;
+  obj1.billGeneration();
+  Bill obj2;
+  cout<<"\nAfter object 2 creation "<<endl;
+  obj2.billGeneration();
+  return 0;
+}
+
+Static Member:
+---------------------
+
+#include<iostream>
+using namespace std;
+class Bill
+{
+   public:
+      static int bill_num;
+      int total;
+     Bill()
+     {
+         bill_num++;
+         total=100;
+     }
+     static int billGeneration()
+     {
+        return bill_num;
+     }
+};
+int Bill ::bill_num=0;
+int main()
+{
+  cout<<"Initial Bill number is "<<Bill::billGeneration<<endl;
+  return 0;
+}
+
+Friend Function:
+---------------------
+
+#include<iostream>
+using namespace std;
+class Bill
+{
+   private:
+      int total;
+    public:
+     Bill()
+     {
+         total=100;
+     }
+     void display()
+     {
+        cout<<total;
+     }
+     friend int discount(Bill b1);
+};
+ int discount(Bill b1) //b1 act as a obj ref
+ {
+     return b1.total-50;
+ }
+int main()
+{
+  Bill b;
+  cout<<"Total ";//100
+  b.display();//100
+  cout<<"\nDiscount Amount: "<<discount(b);
+  return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+

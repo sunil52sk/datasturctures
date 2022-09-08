@@ -1,0 +1,153 @@
+Queue:
+---------
+- FIFO
+- Operation:
+    enqueue() - inserting element inside the queue
+    dequeue() - deleting element from the queue
+- Overflow 
+- Underflow
+
+Using array:
+----------------
+
+#include<iostream>
+using namespace std;
+int queue[50];
+int front=-1,rear=-1;
+void enqueue(int value,int n)
+{
+    if (rear==n-1)
+    {
+        cout<<"Overflow";
+    }
+    else if(front==-1)// queue empty
+    {
+        front=rear=0;
+        queue[front]=value;
+    }
+    else
+    {
+        rear++;
+        queue[rear]=value;
+    }
+}
+int dequeue(int n)
+{
+    int x=queue[front];
+    if(front==-1)
+    {
+        cout<<"Underflow";
+    }
+    else if(front==rear)// one element
+    {
+        front=rear=-1;
+    }
+    else
+    {
+        front++;
+    }
+    return x;
+}
+int main()
+{
+    int n=5;
+    enqueue(10,n);    
+    enqueue(20,n);   
+    enqueue(30,n);   
+    enqueue(40,n);   
+    enqueue(50,n);
+    for(int i=front;i<=rear;i++)
+    {
+        cout<<queue[i]<<" ";
+    }
+    cout<<endl;
+    cout<<dequeue(n)<<" ";
+    cout<<dequeue(n)<<" ";
+    cout<<dequeue(n)<<" ";
+    cout<<endl;
+    for(int i=front;i<=rear;i++)
+    {
+        cout<<queue[i]<<" ";
+    }
+    return 0;
+}
+
+Circular Queue:
+---------------------
+
+#include<iostream>
+using namespace std;
+int queue[50];
+int front=-1,rear=-1;
+void enqueue(int value,int n)
+{
+    if (front==rear+1 || front==0 && rear==n-1) 
+    {
+        cout<<"Overflow";
+    }
+    else if(front==-1)
+    {
+        front=rear=0;
+        queue[front]=value;
+    }
+    else
+    {
+        rear=(rear+1)%n;
+        queue[rear]=value;
+    }
+}
+int dequeue(int n)
+{
+    int x=queue[front];
+    if(front==-1)
+    {
+        cout<<"Underflow";
+    }
+    else if(front==rear) 
+    {
+        front=rear=-1;
+    }
+    else
+    {
+        front=(front+1)%n;
+    }
+    return x;
+}
+void display(int n)
+{
+     if (front == -1)
+    {
+        cout<<"\nQueue is Empty";
+        return;
+    }
+    if (rear >= front)// nrml
+    {
+        for (int i = front; i <= rear; i++)
+           cout<<queue[i]<<" ";
+    }
+    else
+    {
+        for (int i = front; i < n; i++)
+            cout<<queue[i]<<" ";
+ 
+        for (int i = 0; i <= rear; i++)
+            cout<<queue[i]<<" ";
+    }
+}
+int main()
+{
+    int n=5;
+    enqueue(10,n);    
+    enqueue(20,n);   
+    enqueue(30,n);   
+    enqueue(40,n);   
+    enqueue(50,n);
+    cout<<dequeue(n)<<" ";
+    cout<<dequeue(n)<<" ";
+    cout<<dequeue(n)<<" ";
+    enqueue(60,n);   
+    enqueue(70,n);   
+    cout<<endl;
+    display(n);
+    return 0;
+}

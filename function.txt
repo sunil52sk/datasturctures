@@ -1,0 +1,223 @@
+Function:
+- block of code that performs a specific task
+- Dividing a complex problem into smaller chunks
+- easy to understand and reusable.
+
+Two types of function:
+
+1) Standard Library Functions: Predefined in C++
+2) User-defined Function: Created by users
+
+Function Declaration:
+----------------------------
+
+returnType functionName (parameter1, parameter2,...);
+
+Eg: void swap(int a,int b);
+Eg: int sum(int a,int b);
+
+Function Definition:
+---------------------------
+
+returnType functionName (parameter1, parameter2,...) {
+    // function body   
+}
+
+Function Call:
+------------------
+
+int main() {
+     
+    // calling a function   
+    functionName (parameter1, parameter2,...);// sum(a,b)
+}
+Eg:
+
+int main()
+{
+int a=10,b=20;
+swap(a,b);
+}
+
+Eg:
+#include<iostream>
+using namespace std;
+void myFunction(); // Function declaration
+
+int main() {
+  myFunction();  // call the function
+cout<<"End of Prgm";
+  return 0;
+}
+
+// Function definition
+void myFunction() {
+  cout << "IamNeo";
+}
+
+Swap Eg:
+-------------
+
+Call by value 
+
+#include<iostream>
+using namespace std;
+void swap(int a,int b);
+int main() {
+ int a=10,b=20;
+ swap(a,b);//swap(10,20)
+ cout<<"Inside Main:"<<a<<" "<<b;
+  return 0;
+}
+void swap(int a,int b)//10,20
+{
+    int temp;
+    temp=a;
+    a=b;
+    b=temp;
+ cout<<"Inside swap:"<<a<<" "<<b<<endl;
+    
+}
+Call by reference
+--------------------
+
+Passing Array:
+
+#include <iostream>
+using namespace std;
+int* getinput(int *a,int n)//int a[]
+{
+   for (int i = 0; i < n; i++) {
+      cin>>a[i];
+   }
+   return a;
+}
+
+int main () {
+    int n=5; // array size
+    int a[n];// array memory allocation
+    int *p; // pointer
+    p = getinput(a,n);
+   for ( int i = 0; i < n; i++ ) {
+      cout <<*(p+i)<<" ";
+   }
+   return 0;
+}
+
+Recursion:
+--------------
+
+factorial:
+-----------
+n!=n*(n-1)!
+5!= 5*4!
+4!=4*3!
+3!=3*2!
+2!=2*1!
+1!=1
+0!=1
+
+a^5
+a^n=a^n-1*a
+a^5=a^4*a
+a^4=a^3*a
+a^3=a^2*a
+a^2=a^1*a
+a^1=a
+
+
+
+
+
+
+
+
+
+n!= (n-1)!*n
+5!=1*2*3*4*5 => 4!*5
+4!=1*2*3*4 =>3!*4
+3!=1*2*3 => 2!*3
+2!=1*2 => 1!*2
+1!=1
+0!=1 // base condition
+
+
+int fact(int n)
+{
+if(n==1||n==0) //BC
+   return 1;
+else
+   return fact(n-1)*n;
+}
+int main()
+{
+int n=4;
+cout<<fact(n);
+return 0;
+}
+Fib:
+-----
+0 1 1 2 3 5 8 13............
+
+fib(n) =fib(n-1)+fib(n-2)
+
+int fib(int n)
+{
+if(n==0||n==1)
+   return n;
+else
+    return fib(n-1)+fib(n-2)
+}
+
+int main()
+{
+int n=5;
+cout<<fib(n);
+return 0;
+}
+
+a^5
+
+a^4*a
+
+int power(int a,int n)
+{
+if(n==0)
+  return 1;
+else
+   return power(a,n-1)*a
+}
+
+
+a[2] =2[a]
+
+
+
+1
+2
+3
+4
+5
+6....
+
+
+9
+*
+*  *
+*  *  *
+*  *   * *
+
+i*(i+1)/2 == i/p
+
+
+*
+
+
+
+
+
+
+
+
+
+

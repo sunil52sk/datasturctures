@@ -1,0 +1,84 @@
+Pointers:
+-----------
+* About pointer
+* How to access values using pointers?
+* How to print values using pointers?
+* Dynamic array
+
+Pointers:
+-----------
+variable used to hold addr.
+int num=10;
+* symbol
+& - addr oper
+eg: int a=10;
+       int*ptr   = &a;
+           int*       *ptr1  = &ptr
+
+eg: float num=3.1;
+      float*ptr2=&num;/
+      float**ptr3  =&ptr2;
+
+
+How to access var thru pointers:
+------------------------------------------
+eg:
+
+   int a=10;
+   int*ptr   = &a;// 101
+   int**ptr1=&ptr;//105
+   cout<<*ptr ; // *(101)=> value at 101 = 10
+   cout<<**ptr1;// **(105)=> value at 105 is 101 *(101) => value at 101 = 10
+
+Dynamic array:
+--------------------
+=> malloc()
+=> stdlib
+=> malloc(10)=> returns base addr, it belongs to void* type.
+
+
+
+   cin>>n;
+  int*array=(int*) malloc(n*sizeof(int))//n=5
+for(i=0;i<n;i++)
+{
+cin>>(array+i);//cin>>a[i]
+}
+for(i=0;i<n;i++)
+{
+cout<<*(array+i);
+}
+
+
+i=0: (array+0) => (111+0)=>(111)
+i=1: (array+1) => (111+1*sizeof(int))=>(111+2)=>(113)
+(baseaddr+index*(sizeof(datatype))
+i=2: (array+2) => (111+2) => (111+2*2)=> (111+4)=>  (115)
+i=3=> (array+3)=>(111+3*2) => (111+6)=> 117
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

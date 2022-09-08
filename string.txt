@@ -1,0 +1,176 @@
+String Using Char array :
+---------------------------------
+=> collection of characters
+=> use string.h headerfile 
+char array
+char arrayname[size];
+
+Initialization & Declarization:
+---------------------------------------
+
+eg:  char name[50];
+       char name[50]="iamneo";//  '\0' auto
+       char name[50]={'a','p','p','l','e','\0'}
+
+String length :
+-----------------
+#include<string.h>
+#include<cstring>
+char name[50]="iamneo";
+int len;
+len=strlen(name);
+cout<<len;
+
+String copy :
+---------------
+strcpy(des,src)
+
+strcpy(a,b)	
+for(i=0;name[i]!='\0';i++)
+{
+name1[i]=name[i];
+}
+name1[i]='\0'; // important
+
+String Concat :
+-------------------
+strcat(a,b)
+
+for(i=0;name[i]!='\0';i++); //i=0
+for(j=0;des[j]!='\0';j++)
+{
+name[i+j]=name1[j];
+}
+name[i+j]='\0';
+
+String Compare:
+---------------------
+strcmp(a,b)
+
+String functions:
+----------------------
+=> applicable to string datatype
+
+String Concatenation:
+-----------------------------
+using append , +
+Eg:
+----
+#include <iostream>
+using namespace std;
+int main()
+{
+    string firstName = "kathija";
+    string lastName = "kanmani";
+    string fullName = firstName.append(lastName);
+    cout << fullName<<endl;
+    return 0;
+}
+
+String length or size:
+---------------------------
+string.size()
+string.length()
+#include <iostream>
+using namespace std;
+int main()
+{
+    string firstName = "kathija";
+    cout<<firstName.size()<<endl;
+    cout<<firstName.length();
+    return 0;
+}
+
+String Insert:
+----------------
+=> inserts a string at a specified location
+#include <iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string firstName = "wecome";
+    firstName.insert(2,"l");
+    cout<<firstName;
+    return 0;
+}
+
+String Erase:
+------------------
+=>erases a single or multiple character starting at a specified location
+=> variable.erase(index, length);
+Eg:
+-----
+#include <iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string firstName = "welcome";
+    firstName.erase(3,2);//(pos,no.char)
+    cout<<firstName;
+    return 0;
+}
+
+String replace:
+-------------------
+=> str1.replace(pos,len,str2);  
+#include <iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string firstName = "welcome";
+    firstName.replace(2,2,"hai");
+    cout<<firstName;
+    return 0;
+}
+
+String at:
+------------
+
+#include <iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string firstName = "welcome";
+    cout<<firstName.at(2);
+    return 0;
+}
+
+String find:
+---------------
+=>  find the first occurrence of sub-string 
+=> returns the index of the first occurrence
+=> default value of starting position is 0.
+Eg:
+----
+#include <iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string firstName = "welcome";
+    cout<<firstName.find("e",2)<<endl;//6
+    cout<<firstName.find("e");//1
+    return 0;
+}
+
+String Empty:
+------------------
+Eg:
+-----
+#include <iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    string firstName; 
+    cout<<firstName.empty()<<endl;
+    firstName= "welcome";
+    cout<<firstName.empty();
+    return 0;
+}
+
+Reference: https://www.decodejava.com/cpp-functions-of-string-class.htm

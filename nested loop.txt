@@ -1,0 +1,97 @@
+Nested loop:
+----------------
+
+for(init;condition;update)
+{
+	for(init;condition;update)
+	{
+	}
+}
+
+
+stp 1:
+-------
+row=0 ;0<=3(t)
+col=0; 0<=2(T)
+0,0
+col=1;1<=2(T)
+0,1
+col=2;2<=2(T)
+0,2
+col=3;3<=2(F)
+row=1
+
+step 2:
+-------
+row =1;1<=3(T)
+col=0;0<=2(T)
+1,0
+col=1;1<=2(T)
+1,1
+col=2;2<=2(T)
+1,2
+col=3;3<=2(F)
+row=2
+
+
+
+
+
+1
+2 2
+3 3 3
+4 4 4 4
+5 5 5 5 5
+
+
+
+
+Pattern 1:
+
+* 
+* * 
+* * * 
+* * * * 
+* * * * * 
+
+for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= i; j++) {
+            cout << "* ";
+        }
+        cout << endl;
+    }
+}
+
+Pattern 2:
+
+         *
+       **
+     ***
+   ****
+ *****
+
+for()
+{
+	for()
+	{
+	}
+	for()
+	{
+	}
+
+}
+
+
+
+
+
+
+pattern 3:
+
+* * * * * 
+* * * * 
+* * * 
+* * 
+* 
+
+

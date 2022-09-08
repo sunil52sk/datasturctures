@@ -1,0 +1,157 @@
+File Handling:
+-------------------
+- store a data permanently in secondary memory (Hard disk).
+- Steps in file handling:-
+ 	Naming a file
+ 	Opening a file
+ 	Writing data into the file
+ 	Reading data from the file
+ 	Closing a file.
+
+Eg:
+ 
+#include <iostream>
+#include <fstream>
+using namespace std;
+int main() {
+string str="Today C++ is the most widely used System Programming Language.";
+ofstream out;// output is a file , Stream class to write on files
+ifstream inf;// input is a file, Stream class to read from files
+out.open("my_file.txt");//opening file
+out<<str<<endl;// writing string in output file
+out.close();
+inf.open("my_file.txt",ios::in); // Open for input operations.
+string s;
+while (getline(inf,s))
+{
+cout << s<<endl;
+}
+inf.close();
+return 0;
+}
+
+Count number of char in the file:
+-------------------------------------------
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+int main() {
+string str="Today C++ is the most widely used System Programming Language.";
+ofstream out;// output is a file
+ifstream inf;// input is a file
+out.open("my_file.txt");//opening file
+out<<str<<endl;// writing string in output file
+out.close();
+inf.open("my_file.txt",ios::in); // this is my input file
+char s;
+int count=0;
+while (inf.get(s))//hai welcome to file handling
+{
+    if(s!=' ')
+      count++;
+}
+cout<<count;
+inf.close();
+return 0;
+}
+
+
+Integer:
+
+#include<iostream>
+#include<sstream>
+#include<fstream>
+using namespace std;
+int main ()
+{
+    int i=0,n;
+    ofstream myfile;
+    myfile.open ("example1.txt");
+    cin>>n;
+    for (int j=0; j < n; j++)
+    {
+        cin>>i;
+        myfile  << i <<"\n";
+    }
+    myfile.close();
+    ifstream inf;
+    inf.open("example1.txt",ios::in); // this is my input file
+    string line;
+    int max=0,min=999,num;
+    while (getline(inf,line))
+    {
+    istringstream iss(line);
+    while (iss >> num) {
+    if(max<num)
+        max=num;
+    if(min>num)
+        min=num;
+    }
+    }
+    cout<<max<<" "<<min;
+    inf.close();
+return 0;
+}
+
+
+#include <iostream>
+#include <fstream>
+using std::ofstream; 
+using namespace std;
+ int main()
+{
+fstream file;
+file.open("sample.txt",ios::out);
+ofstream write;
+int n;
+cin>>n;
+write.open("sample.txt");
+for(int i=0;i<n;i++){
+    int in;
+    cin>>in;
+    write<<in<<" ";
+}
+write.close();
+ifstream read;
+read.open("sample.txt",ios::in);
+int max,min,currentvalue;
+read>>max;
+read>>min;
+read.seekg(ios::beg);
+while(read>>currentvalue){
+    if(max<=currentvalue){
+        max=currentvalue;
+    }
+    if(min>=currentvalue){
+        min=currentvalue;
+    }
+}
+cout<<max<<" "<<min;
+read.close();
+ file.close();
+ return 0;
+}
+
+
+Using fstream:
+--------------------
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+int main() {
+fstream fio;// output is a file
+fio.open("my_file.txt", ios::trunc | ios::out | ios::in);
+string str="Today C++ is the most widely used System Programming Language.\nMost of the state of the art software have been implemented using C++.\nEasy to learn\nStructured language\nIt produces efficient programs.\nIt can handle low-level activities.\nIt can be compiled on a variety of computers.";
+fio<<str<<endl;// writing string in output file
+fio.seekg(0, ios::beg);
+string s;
+int count=0;
+while (getline(fio,s))
+{
+cout << s<<endl;
+}
+fio.close();
+return 0;
+}

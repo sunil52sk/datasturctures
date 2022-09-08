@@ -1,0 +1,158 @@
+Stack:
+------
+LIFO
+top - used to point the index of topmost element in stack
+top = -1 (initial)
+Function:
+---------
+PUSH() -insert
+1) if(top==size-1)
+      print "stack overflow"
+2) else top++
+3) stack[top]=value
+POP() -remove
+1) if(top==-1)
+      print "Underflow"
+2) else top--
+
+
+
+PEEK() - top element
+
+Exception:
+
+Overflow - trying to PUSH when stack is full
+Underflow -trying to POP when stack is empty
+
+Implementation using array:
+---------------------------
+
+#include <iostream>
+using namespace std;
+int stack[5], n=5, top=-1;
+void push(int val) {
+   if(top==n-1)
+   cout<<"Stack Overflow"<<endl;
+   else {
+      top++;
+      stack[top]=val;
+   }
+}
+void pop() {
+   if(top==-1)
+   cout<<"Stack Underflow"<<endl;
+   else {
+      cout<<"The popped element is "<< stack[top] <<endl;
+      top--;
+   }
+}
+
+if(top==-1)
+   print balanced 
+else
+   print not balanced 
+void display() {
+   if(top>=0) {
+      cout<<"Stack elements are:";
+      for(int i=top; i>=0; i--)
+      cout<<stack[i]<<" ";
+      cout<<endl;
+   } else
+   cout<<"Stack is empty";
+}
+
+
+Linked List imple:
+-------------------
+
+push() - insertion at front
+pop() - Deletion at front
+
+PUSH()
+------
+1) create node
+2) nn ->data =value
+3) nn ->addr = NULL
+4) if(top==NULL)//0 node 
+     top=nn
+   else
+     nn->addr = top
+     top=nn
+
+POP()
+-----
+1) if(top==NULL)
+      print "Underflow"
+2) else 
+     top=top->addr
+
+Infix to postfix:
+--------------------
+#include<iostream>
+#include<ctype.h>
+using namespace std;
+char stack[100];
+int top = -1;
+void push(char x)
+{
+    stack[++top] = x;
+}
+char pop()
+{
+    if(top == -1)
+        return -1;
+    else
+        return stack[top--];
+}
+int priority(char x)
+{
+    if(x == '(')
+        return 0;
+    if(x == '+' || x == '-')
+        return 1;
+    if(x == '*' || x == '/')
+        return 2;
+    return 0;
+}
+
+int main()
+{
+    char exp[100];
+    char *e, x;
+    cin>>exp;
+    cout<<"\n";
+    e = exp;
+    while(*e != '\0')
+    {
+        if(isalnum(*e))
+           cout<<*e;
+        else if(*e == '(')
+            push(*e);
+        else if(*e == ')')
+        {
+            while((x = pop()) != '(')
+                cout<<x;
+        }
+        else
+        {
+            while(priority(stack[top]) >= priority(*e))
+                cout<<pop();
+            push(*e);
+        }
+        e++;
+    }
+    while(top != -1)
+    {
+        cout<<pop()<<" ";
+    }return 0;
+}
+
+
+
+
+
+
+
+
+
+

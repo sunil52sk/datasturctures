@@ -1,0 +1,125 @@
+Exception handling:
+---------------------------
+What is Exception handling?
+- exception is a problem that arises during execution of a program. 
+- exceptional circumstance that arises while a program is running
+- While executing, different errors can occur: 
+     1)coding errors made by the programmer, 
+     2)errors due to wrong input, or other unforeseeable things.
+- error occurs ->program stop and generate an error message. 
+
+How to implement Exception Handling?
+- separate your error handling code from your normal code. 
+
+Keywords:
+
+Three keywords: 
+  1) try
+  2) throw
+  3) catch
+
+try - allows to define block of code to be tested for errors
+throw - throws an exception when a problem is detected
+catch - allows to define block of code to be executed, if an error occurs in try block.
+
+Eg 1:
+-------
+#include <iostream>
+using namespace std;
+int main()
+{
+   int age ;
+   try {
+   cin>>age;//-2
+   if (age < 0)
+   {
+       throw "Age should be greater than zero";
+   }
+   else{
+   cout<<age;
+  }
+}
+   catch (const char *ch ) {
+      cout << ch;
+   }
+   return 0;
+}
+
+Eg2:
+------
+#include <iostream>
+using namespace std;
+int main()
+{
+   int age;
+   try {
+      cin>>age;
+      if (age < 0)
+      {
+         throw age;
+      }
+   }
+   catch (int x) {
+      cout << "Age should be greater than zero"<<x;
+   }
+   return 0;
+}
+
+Exception not matched:
+-------------------------------
+
+#include <iostream>
+using namespace std;
+int main()
+{
+   int age = -1;
+   try {
+      if (age < 0)
+      {
+         throw age;
+      }
+   }
+   catch (const char *ch ) {
+      cout << ch;
+   }
+   return 0;
+}
+Error:
+terminate called after throwing an instance of 'int'
+
+How to handle this?
+
+#include <iostream>
+using namespace std;
+int main()
+{
+   int age = -1;
+   try {
+      if (age < 0)
+      {
+         throw age;
+      }
+   }
+   catch (...) {
+      cout <<"Age should be greater than zero";
+   }
+   return 0;
+}
+
+
+Inbuilt Exceptions:
+----------------------
+#include <iostream>
+using namespace std;
+int main()
+{
+    try
+  {
+   int *arr = new int[10000000000];
+   }
+   catch (exception &e) 
+  {
+     cout <<"Memory not allocated";
+  }
+   return 0;
+}

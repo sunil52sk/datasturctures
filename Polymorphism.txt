@@ -1,0 +1,137 @@
+Polymorphism:
+------------------
+- having many forms
+- Eg: person at the same time have different characteristics. 
+  i.e Man {father, a husband, an employee}
+- Two types:
+   1)Compile time Polymorphism / Overloading / Static Binding
+   2)Runtime Polymorphism / Overriding / Dynamic binding / late binding.
+
+Function Overloading:
+------------------------------
+- multiple functions with same name but different number 
+   of arguments or/and change in type of arguments.
+-  Eg1:
+
+#include <iostream>
+using namespace std;
+class Overload
+{
+    public:
+    void fun(int x)//m1
+   {
+       cout << "value of x is " << x << endl;
+   }
+   void fun(double x)//m2
+   { 
+     cout << "value of x is " << x << endl;
+   }
+   void fun(int x, int y)//m3
+   {
+       cout << "value of x and y is " << x << ", " << y << endl;
+   }
+};
+int main() {
+	Overload obj1;
+	obj1.fun(7);
+	obj1.fun(9.132);
+	obj1.fun(85,64);
+	obj1.fun(85.09,64.98);
+	return 0;
+}
+
+Eg: 2
+
+#include <iostream>
+using namespace std;
+void sum(int num1, int num2) {
+    cout << "Sum 1 = " << num1 + num2<< endl;
+}
+void sum(double num1, double num2) {
+    cout << "Sum 2 = " <<  num1 + num2<< endl;
+}
+void sum(int num1, int num2, int num3) {
+    cout << "Sum 3 = " << num1 + num2 + num3<< endl;
+}
+int main() {
+    sum(5, 6) ;
+    sum(5.5, 6.6);
+    sum(5, 6, 7);
+    return 0;
+}
+
+Operator Overloading:
+-------------------------------
+- redefine or overload most of the built-in operators
+- keyword "operator" followed by symbol for the operator being defined.
+
+#include<iostream>
+using namespace std;
+class Complex {
+private:
+	int real, imag;
+public:
+    	Complex(){}
+	Complex(int r, int i) 
+	{real = r; imag = i;}
+	Complex operator + (Complex obj) {
+		Complex res;
+		res.real = real + obj.real;
+		res.imag = imag + obj.imag;
+		return res;
+	}
+	void print() { cout << real << " + i" << imag; }
+};
+int main()
+{
+	Complex c1(10, 5), c2(2, 4);
+	Complex c3 = c1 + c2; //operator method
+	c3.print();
+}
+
+Runtime Polymorphism:
+-----------------------------
+#include<iostream>
+using namespace std;
+class Animal {
+  public:
+    void animalSound() {
+    cout << "Animal sounds: \n" ;
+  }
+};
+class Dog : public Animal {
+  public:
+    void animalSound() {
+    cout << "The dog says: bow bow \n" ;
+  }
+};
+int main() {
+  Dog d;
+  d.Animal::animalSound(); // Animal
+  d.animalSound();
+  return 0;
+}
+
+Eg 2:
+
+#include<iostream>
+using namespace std;
+class Animal {
+  public:
+     void animalSound() {
+    cout << "Animal sounds: \n" ;
+  }
+};
+class Dog : public Animal {
+  public:
+    void animalSound() {
+    cout << "The dog says: bow bow \n" ;
+  }
+};
+int main() {
+  Dog d;
+  Animal* a=&d;
+  a->animalSound();
+  d.animalSound();
+  return 0;
+}
