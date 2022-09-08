@@ -1,0 +1,110 @@
+#include<iostream>
+using namespace std;
+struct node{
+      struct node* left;
+      int data;
+      struct node* right;
+};
+struct node* toCreateNN(int value)
+{
+     struct node* nn = (struct node*) malloc(sizeof(struct node));
+	nn->data = value;
+	nn->left = NULL;
+	nn->right = NULL;
+	return nn;
+}
+void preorder(struct node* q)
+{
+    if(q==NULL)
+        return;
+    else{
+        cout<<q->data<<" ";
+        preorder(q->left);
+        preorder(q->right);
+    }
+}
+void inorder(struct node* q)
+{
+    if(q==NULL)
+        return;
+    else{
+        inorder(q->left);
+        cout<<q->data<<" ";
+        inorder(q->right);
+    }
+}
+void postorder(struct node* q)
+{
+    if(q==NULL)
+        return;
+    else{
+        postorder(q->left);
+        postorder(q->right);
+        cout<<q->data<<" ";
+    }
+}
+struct node* insert(struct node* q, int value)
+{
+    if(q==NULL)
+        q = toCreateNN(value);
+    else if(value > q->data)
+        q->right = insert(q->right,value);
+    else
+        q->left = insert(q->left,value);
+    return q;
+}
+struct node* minvalue(struct node* root)
+{
+    while(root->left!=NULL)
+    {
+        root=root->left;
+    }
+    return root;
+}
+struct node* del(struct node*root, int item)
+{
+    struct node* t;
+    if(root==NULL)
+    {
+        printf("Tree is empty");
+        return NULL;
+    }
+    else if(item<root->data) // to search left branch
+    {
+        root->left=del(root->left,item); 
+    }
+    else if(item>root->data) // to search right branch
+    {
+        root->right=del(root->right,item);
+    }
+    else // exact node
+    {
+        if(root->left==NULL && root->right==NULL)// case 1 : Leaf node
+            return NULL;
+        else if(root->left==NULL)// case2: with one child, its having right child
+            return root->right;
+        else if(root->right==NULL)// case 2: with one child, its having left child
+            return  root->left;
+        else //case 3:node with two child
+        {
+            t=minvalue(root->right);
+            root->data=t->data;
+            root->right=del(root->right,t->data);
+        }  
+    }
+}
+
+int main(){
+struct node* head = NULL;
+head = insert(head,10);
+head = insert(head,15);
+head = insert(head,7);
+head = insert(head,2);
+head = insert(head,17);
+cout<<endl<<"In-order Traversal : ";
+inorder(head);
+head=del(head,12);
+head=del(head,55);
+cout<<endl<<"In-order Traversal : ";
+inorder(head);
+}
