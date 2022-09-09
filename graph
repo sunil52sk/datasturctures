@@ -1,0 +1,123 @@
+#include<iostream>
+#include<stdlib.h>
+#include<string.h>
+using namespace std;
+void matrix(int **,int);
+int main()
+{
+  int n,e,i,**w,j;
+  int r1,c1,w1;
+   char ch[5];
+  cout<<"Enter number of nodes and edges\n";
+  cin>>n;
+  cin>>e;
+  w=(int**)malloc(n*sizeof(int*));
+  for(i=0;i<n;i++)
+   {
+    *(w+i)=(int *)calloc(n,sizeof(int));
+   }
+  cout<<"Is the graph directed"<<endl;
+  cin>>ch;
+  cout<<"Enter the start node, end node and weight of edge "<<endl;
+  for(i=0;i<e;i++) {
+    cin>>r1>>c1>>w1;
+    w[r1][c1] = w1;
+    if(strcmp(ch,"no")==0) {
+        w[c1][r1] = w1;
+    }
+  }
+  cout<<"Adjacency Matrix Representation:\n";
+  for(i=0;i<n;i++) {
+      for(j=0;j<n;j++) {
+          cout<<w[i][j]<<" ";
+      }
+      cout<<endl;
+  }
+ return 0;
+}
+
+
+//Graph --- Adjacency matrix and Adjacency list representation
+
+#include<iostream>
+#include<stdlib.h>
+#include<string.h>
+using namespace std;
+struct node
+{
+int nodeno;
+int edgeweight;
+struct node *link;
+};
+struct node * createNode(int nodeno, int w) {
+    struct node *p = (struct node *) malloc(sizeof(struct node) );
+    p->nodeno = nodeno;
+    p->edgeweight = w;
+    p->link = NULL;
+    return p;
+}
+struct node  convmattolist(int A,int n,char *dir)
+{
+struct node list = (struct node ) malloc(n * sizeof(struct node*));
+int i,j;
+for(i=0;i<n;i++) {
+   for(j=0;j<n;j++) {
+       if( A[i][j] > 0 ) {
+           if(*(list+i) == NULL) {
+               *(list+i) = createNode(j,*(*(A+i)+j));
+           }
+           else {
+               struct node *start = *(list+i);
+               while(start->link != NULL) {
+                   start = start->link;
+               }
+               start->link = createNode(j,*(*(A+i)+j));
+           }
+       }
+   }
+}
+return list;
+}
+void printlist(struct node **list,int n)
+{
+cout<<"Adjacency List Representation:\n";
+int i;
+for(i=0;i<n;i++) {
+   struct node *s = *(list+i);
+   if(s != NULL) {
+       cout<<"Node "<<i<<" is connected :\n",i;
+       while(s!=NULL) {
+           cout<<"Node "<<s->nodeno<<" edge weight "<<s->edgeweight<<endl;
+           s = s->link;
+       }
+   }
+}
+}
+int main()
+{
+  int n,e,i,**w,j;
+  int r1,c1,w1;
+   char ch[5];
+   struct node **list;
+  cout<<"Enter number of nodes and edges\n";
+  cin>>n;
+  cin>>e;
+  w=(int**)malloc(n*sizeof(int*));
+  for(i=0;i<n;i++)
+   {
+    *(w+i)=(int *)calloc(n,sizeof(int));
+   }
+  cout<<"Is the graph directed"<<endl;
+  cin>>ch;
+  cout<<"Enter the start node, end node and weight of edge "<<endl;
+  for(i=0;i<e;i++) {
+    cin>>r1>>c1>>w1;
+    w[r1][c1] = w1;
+    if(strcmp(ch,"no")==0) {
+        w[c1][r1] = w1;
+    }
+  }
+  list = convmattolist(w,n,ch);
+  printlist(list,n);
+ return 0;
+}
